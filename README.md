@@ -1,2 +1,2 @@
 # dsabig2_project
-big2学生代码
+学生代码存放在student里面
