@@ -104,7 +104,7 @@ def main(argv):
             score, t = Annie.check([])
         output = "{:<80}" if player is Tom else "{:>80}"
         print(output.format(str(t) if t else "pass"))
-        player.ack(t) # player获知Annie的裁定
+        player.ack(t.copy()) # player获知Annie的裁定
     else:
         print("{} is the winner! score={}".format(player.teamName(), score))
         with open('result/%s.txt' % game,'a+') as f:

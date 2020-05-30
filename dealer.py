@@ -1,6 +1,7 @@
 import copy
 import collections
 
+
 class Dealer:
     def __init__(self, v):
         self.version = v

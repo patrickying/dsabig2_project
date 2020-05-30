@@ -10,7 +10,7 @@ def PK(command):
 
 for att in range(len(folder)):
     for de in range(len(folder)):
-        if att != de and de != 5 and att != 5:
+        if att != de:
             for gameing in range(11):
                 command = "python big2.py -a %s -d %s -g %s" % ('student.'+ folder[att]+file[att],'student.'+ folder[de]+file[de],gameing)
                 # pool = multiprocessing.Pool(processes=4)

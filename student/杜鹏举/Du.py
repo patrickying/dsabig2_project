@@ -190,6 +190,8 @@ class Player:
 
     def ack(self, t):
         # 使用数值代替牌面
+        # print(self.myhand,t)
+        self.getVal(t)
         movesA = self.getNextMove(self.myhand, -1, -1)
         if t == []:
             for i, move in enumerate(movesA):
