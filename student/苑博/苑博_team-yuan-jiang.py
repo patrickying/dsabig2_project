@@ -19,7 +19,8 @@ class Player:
     def newGame(self, hand1, hand2, opponent):
         self.myHand = self.order(hand1)
         self.yourHand = self.order(hand2)
-        self.opponent = self.order(opponent)
+        # self.opponent = self.order(opponent)
+        self.opponent = opponent
 
     def is__danpai(self, t):  # 判断牌型t是否为顺子,t为列表
         if len(t) == 1:
@@ -568,23 +569,24 @@ class Player:
             output = []
             for item in self.MaxmyHand():  # 避免手牌仅有炸弹时出错
                 output.append(item)
-            for item in output:
-                self.myHand.remove(item)
+            # for item in output:
+            #     self.myHand.remove(item)
             return output
         elif not self.BoominmyHand(self.myHand) or self.SortinmyHand(t): # 有可回应的牌（无论有无炸弹）
             output = self.SortinmyHand(t)
-            for item in output:
-                self.myHand.remove(item)
+            # for item in output:
+            #     self.myHand.remove(item)
             return output 
         else: # 有炸弹，无可回应的牌
             output = self.BoominmyHand(self.myHand)
-            for item in output:
-                self.myHand.remove(item)
+            # for item in output:
+            #     self.myHand.remove(item)
             return output 
 
     def ack(self, t):
         #print("ack: {}".format(self.myHand))
         for c in t:
+            # print('a',str(c),t,self.myHand)
             self.myHand.remove(c)
 
     def teamName(self):

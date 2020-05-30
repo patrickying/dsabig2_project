@@ -3,7 +3,7 @@ import numpy as np
 #神经网络
 class Net():
 	def __init__(self):
-		D=np.load('./张景淇and毛子宸队/net.npz')
+		D=np.load('student/张景淇/net.npz')
 		k=0
 		self.w1w=[0]*4
 		self.w1b=[0]*4

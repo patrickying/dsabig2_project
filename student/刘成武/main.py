@@ -1367,7 +1367,7 @@ newB = player()
 startTime = timerecorder()
 depthLimit = 30
 timeLimit = 29.99
-class PlayerInterface:
+class Player:
     def teamName(self):
         return 'Liu_Chengwu'
     def ack(self,t):

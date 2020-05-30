@@ -74,9 +74,12 @@ def main(argv):
     t, player, score = [], None, None
     while not score:
         # Tom 先手，然后轮流出牌
-        player = Tom if not player or player is Jack else Jack 
-        t = player.play(t)
-        score, t = Annie.check(t)
+        player = Tom if not player or player is Jack else Jack
+        try:
+            t = player.play(t.copy())
+            score, t = Annie.check(t)
+        except:
+            score, t = Annie.check([])
         output = "{:<80}" if player is Tom else "{:>80}"
         print(output.format(str(t) if t else "pass"))
         player.ack(t) # player获知Annie的裁定
