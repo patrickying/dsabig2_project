@@ -2,6 +2,26 @@ from dealer import Dealer
 import sys, getopt
 import copy
 import importlib
+import threading
+
+class RunWithTimeout(object):
+    def __init__(self, function, args):
+        self.function = function
+        self.args = args
+        self.answer = []
+
+    def worker(self):
+        try:
+            self.answer = self.function(self.args)
+        except:
+            self.answer = []
+
+    def run(self, timeout):
+        thread = threading.Thread(target=self.worker)
+        thread.start()
+        thread.join(timeout)
+        return self.answer
+
 
 def choosePlayer(teamName):
 
@@ -76,7 +96,9 @@ def main(argv):
         # Tom 先手，然后轮流出牌
         player = Tom if not player or player is Jack else Jack
         try:
-            t = player.play(t.copy())
+            # t = player.play(t.copy())
+            time_out = RunWithTimeout(player.play, t.copy())
+            t = time_out.run(30)
             score, t = Annie.check(t)
         except:
             score, t = Annie.check([])
