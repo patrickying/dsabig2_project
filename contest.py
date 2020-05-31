@@ -8,13 +8,16 @@ file = ['王子豪_Team5','main','吕韪帆_TeamEnvironMen','张可尔_alphapoke
 def PK(command):
     os.system(command)
 
-for att in range(len(folder)):
-    for de in range(len(folder)):
-        if att != de:
-            for gameing in range(11):
-                command = "python big2.py -a %s -d %s -g %s" % ('student.'+ folder[att]+file[att],'student.'+ folder[de]+file[de],gameing)
-                # pool = multiprocessing.Pool(processes=4)
-                PK(command)
-                # os.system("python big2.py -a %s -d %s -g %s" % ('student.'+ folder[att]+file[att],'student.'+ folder[de]+file[de],1))
-# command = "python big2.py -a %s -d %s -g %s" % ('student.'+ folder[0]+file[0],'student.'+ folder[5]+file[5],1)
-# PK(command)
+if __name__ == "__main__":
+    for att in range(2,len(folder)):
+        for de in range(len(folder)):
+            if att != de and  (att == 6 or de == 6):
+                for gameing in range(6,11,5):
+                    # command = "python big2.py -a %s -d %s -g %s" % ('student.'+ folder[att]+file[att],'student.'+ folder[de]+file[de],gameing)
+                    command_list = []
+                    for game in range(gameing,gameing+5):
+                        command = "python big2.py -a %s -d %s -g %s" % (
+                        'student.' + folder[att] + file[att], 'student.' + folder[de] + file[de], game)
+                        command_list.append(command)
+                    pool = multiprocessing.Pool(processes=5)
+                    pool.map(PK, command_list)

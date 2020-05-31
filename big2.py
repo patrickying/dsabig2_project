@@ -8,16 +8,17 @@ class RunWithTimeout(object):
     def __init__(self, function, args):
         self.function = function
         self.args = args
-        self.answer = []
+        self.answer = ['timeout']
 
     def worker(self):
         try:
             self.answer = self.function(self.args)
         except:
-            self.answer = []
+            self.answer = ['error']
 
     def run(self, timeout):
         thread = threading.Thread(target=self.worker)
+        thread.setDaemon(True)
         thread.start()
         thread.join(timeout)
         return self.answer
@@ -98,13 +99,20 @@ def main(argv):
         try:
             # t = player.play(t.copy())
             time_out = RunWithTimeout(player.play, t.copy())
-            t = time_out.run(30)
+            t = time_out.run(33)
+            if len(t) == 1 and (t[0] == 'timeout' or t[0] == 'error'):
+                print(t[0])
+                t = []
             score, t = Annie.check(t)
         except:
+            print('error2')
             score, t = Annie.check([])
         output = "{:<80}" if player is Tom else "{:>80}"
         print(output.format(str(t) if t else "pass"))
-        player.ack(t.copy()) # player获知Annie的裁定
+        try:
+            player.ack(t.copy()) # player获知Annie的裁定
+        except:
+            pass
     else:
         print("{} is the winner! score={}".format(player.teamName(), score))
         with open('result/%s.txt' % game,'a+') as f:
@@ -118,6 +126,7 @@ def main(argv):
             f.write(' ')
             f.write(str(score))
             f.write('\n')
+        print('write')
 
 if __name__ == "__main__":
     main(sys.argv[1:])
