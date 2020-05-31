@@ -1,4 +1,6 @@
+import copy
 class Player:
+
     def __init__(self):
         self.name = "Du&Zhou"
 
