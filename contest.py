@@ -9,10 +9,10 @@ def PK(command):
     os.system(command)
 
 if __name__ == "__main__":
-    for att in range(2,len(folder)):
+    for att in range(len(folder)):
         for de in range(len(folder)):
-            if att != de and  (att == 6 or de == 6):
-                for gameing in range(6,11,5):
+            if att != de:
+                for gameing in range(1,11,5):
                     # command = "python big2.py -a %s -d %s -g %s" % ('student.'+ folder[att]+file[att],'student.'+ folder[de]+file[de],gameing)
                     command_list = []
                     for game in range(gameing,gameing+5):
